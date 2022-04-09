@@ -8,7 +8,7 @@ on:
     branches:    
       - nhentai
   schedule:
-    - cron: '30 2 * * *'
+    - cron: '30 1 * * *'
 
 jobs:
   deploy:
@@ -30,6 +30,7 @@ jobs:
     - name: Getting bz
       run: |
         python3 main.py
+        python3 wozaixiaoyuan.py
 
     - name: Upload bz
       run: |
