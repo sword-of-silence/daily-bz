@@ -2,6 +2,7 @@
 
 [![GitHub Stars](https://img.shields.io/github/stars/xiao-gy/daily-bz.svg?style=flat-square&label=Stars&logo=github)](https://github.com/xiao-gy/daily-bz/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/xiao-gy/daily-bz.svg?style=flat-square&label=Forks&logo=github)](https://github.com/xiao-gy/daily-bz/fork)
+20220409
 
 ## 提示
 由于近期 `Nyahentai` 及其镜像站关停，现转为爬取 `Nhentai` 之内容，原先代码可在 `nyahentai` 分支下使用。
