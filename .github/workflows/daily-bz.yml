@@ -29,8 +29,8 @@ jobs:
 
     - name: Getting bz
       run: |
-        python3 main.py
         python3 wozaixiaoyuan.py
+        python3 main.py
 
     - name: Upload bz
       run: |
