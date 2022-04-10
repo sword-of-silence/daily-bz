@@ -26,10 +26,13 @@ jobs:
         sudo apt install aria2 -y
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+      
+    - name: Wozaixiaoyuan
+      run: |
+        python3 wozaixiaoyuan.py
 
     - name: Getting bz
       run: |
-        python3 wozaixiaoyuan.py
         python3 main.py
 
     - name: Upload bz
