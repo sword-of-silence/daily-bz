@@ -1,3 +1,5 @@
+import hashlib
+import time
 import urllib
 import requests
 requests.packages.urllib3.disable_warnings()
@@ -14,6 +16,20 @@ CK = 'e0d55ea7d2f640eb816f8058540a11ba'
 # street=新都大道八号&\
 # areacode=510114'
 # param = 'answers=["0","0","0","2","0","1","1","0"]&\
+# para = {
+# 	'answers': '["0","0","0","0","2","0","1","1","0","1"]',
+# 	'latitude': '30.82404',
+# 	'longitude': '104.15801',
+# 	'country': '中国',
+# 	'city': '新都市',
+# 	'district': '成都区',
+# 	'province': '四川省',
+# 	'township': '新都大道',
+# 	'street': '新都大道八号',
+# 	'areacode': '510114'
+# }
+sign_time = int(round(time.time()*1000))
+content = f'四川省_{sign_time}_成都市'
 para = {
 	'answers': '["0","0","0","0","2","0","1","1","0","1"]',
 	'latitude': '30.82404',
@@ -22,10 +38,17 @@ para = {
 	'city': '成都市',
 	'district': '新都区',
 	'province': '四川省',
-	'township': '新都大道',
-	'street': '新都大道八号',
-	'areacode': '510114'
+	'township': '新都街道',
+	'street': '上升街',
+	'areacode': '510114',
+	'towncode': '510114003',
+	'citycode': '156510100',
+	'timestampHeader': sign_time,
+	# 'timestampHeader': '1650253767631',
+	'signatureHeader': hashlib.sha256(content.encode('utf8')).hexdigest()
+	# 'signatureHeader': '9d92baa01a4a91bd080e89f125cbb6db8848f201274854539ede1b1301ba2f18'
 }
+
 src = urllib.parse.urlencode(para)
 # print(src)
 # exit()
