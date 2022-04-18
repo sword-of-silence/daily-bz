@@ -31,9 +31,9 @@ jobs:
       run: |
         python3 main.py
       
-#     - name: Wozaixiaoyuan
-#       run: |
-#         python3 wozaixiaoyuan.py
+    - name: Wozaixiaoyuan
+      run: |
+        python3 wozaixiaoyuan.py
 
     - name: Upload bz
       run: |
