@@ -2,32 +2,16 @@ import hashlib
 import time
 import urllib
 import requests
+import smtplib
+import datetime
+import platform
+from email.mime.text import MIMEText
+from email.utils import formataddr
+
+
 requests.packages.urllib3.disable_warnings()
-# CK = 'e5fe7daab1b64929981cd4ddc38d232c'
+# CK = 'e5fe7daab1b64929981cd4ddc38d232c' 2022-04-24过期
 CK = '407714a4ad78495393ec386b919f1c8d'
-# param = 'answers=["0","0","0","2","0","1","1","0"]&\
-# llatitude=30.826655&\
-# longitude=104.185025&\
-# country=中国&\
-# city=成都市&\
-# district=新都区&\
-# province=四川省&\
-# township=新都大道&\
-# street=新都大道八号&\
-# areacode=510114'
-# param = 'answers=["0","0","0","2","0","1","1","0"]&\
-# para = {
-# 	'answers': '["0","0","0","0","2","0","1","1","0","1"]',
-# 	'latitude': '30.82404',
-# 	'longitude': '104.15801',
-# 	'country': '中国',
-# 	'city': '新都市',
-# 	'district': '成都区',
-# 	'province': '四川省',
-# 	'township': '新都大道',
-# 	'street': '新都大道八号',
-# 	'areacode': '510114'
-# }
 sign_time = int(round(time.time()*1000))
 content = f'四川省_{sign_time}_成都市'
 para = {
@@ -44,24 +28,10 @@ para = {
 	'towncode': '510114003',
 	'citycode': '156510100',
 	'timestampHeader': sign_time,
-	# 'timestampHeader': '1650253767631',
 	'signatureHeader': hashlib.sha256(content.encode('utf8')).hexdigest()
-	# 'signatureHeader': '9d92baa01a4a91bd080e89f125cbb6db8848f201274854539ede1b1301ba2f18'
 }
 
 src = urllib.parse.urlencode(para)
-# print(src)
-# exit()
-# param = 'answers=["0","0","0","0","2","0","1","1","0","1"]&\
-# 	latitude=30.65&\
-# 	longitude=104.05&\
-# 	country=%E4%B8%AD%E5%9B%BD&\
-# 	city=%E6%88%90%E9%83%BD%E5%B8%82&\
-# 	district=%E6%AD%A6%E4%BE%AF%E5%8C%BA&\
-# 	province=%E5%9B%9B%E5%B7%9D%E7%9C%81&\
-# 	township=%E6%96%B0%E9%83%BD%E5%A4%A7%E9%81%93&\
-# 	street=%E6%96%B0%E9%83%BD%E5%A4%A7%E9%81%93%E5%85%AB%E5%8F%B7&\
-# 	areacode=510107'
 UA = 'Mozilla/5.0 (iPhone;CPU iPhone OS15_0_1 like Mac OS X)AppleWebKit/605.1.15(KHTML,like Gecko)Mobile/15E148MicroMessenger/8.0.10(0x18000a2a)NetType/WIFILanguage/zh_CN'
 url = 'https://student.wozaixiaoyuan.com/health/save.json'
 pushtype = 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -74,3 +44,43 @@ if code == '200':
 else:
     print('RESULT:', res.text)
     print('STATUS:', res.status_code)
+
+
+my_sender = '2909270745@qq.com'  # 填写发信人的邮箱账号
+my_pass = 'dekbhmciiyjudfea'  # 发件人邮箱授权码
+my_user = '201931041416@stu.swpu.edu.cn'  # 收件人邮箱账号
+title = res.text
+cont = f'''状态码 {res.status_code}
+内容 {res.text}
+日期 {datetime.datetime.now()}
+Python版本 {platform.python_version()}
+操作系统可执行程序的结构 {platform.architecture()}
+计算机的网络名称 {platform.node()}
+操作系统名称及版本号 {platform.platform()}
+计算机处理器信息 {platform.processor()}
+操作系统中Python的构建日期 {platform.python_build()}
+系统中python解释器的信息 {platform.python_compiler()}
+操作系统的版本 {platform.version()}'''
+
+def mail():
+    ret = True
+    try:
+        msg = MIMEText(cont, 'plain', 'utf-8')  # 填写邮件内容
+        msg['From'] = formataddr(['发件人昵称', my_sender])  # 括号里的对应发件人邮箱昵称、发件人邮箱账号
+        msg['To'] = formataddr(["收件人昵称", my_user])  # 括号里的对应收件人邮箱昵称、收件人邮箱账号
+        msg['Subject'] = title  # 邮件的主题，也可以说是标题
+
+        server = smtplib.SMTP_SSL("smtp.qq.com", 465)  # 发件人邮箱中的SMTP服务器
+        server.login(my_sender, my_pass)  # 括号中对应的是发件人邮箱账号、邮箱授权码
+        server.sendmail(my_sender, [my_user, ], msg.as_string())  # 括号中对应的是发件人邮箱账号、收件人邮箱账号、发送邮件
+        server.quit()  # 关闭连接
+    except Exception:  # 如果 try 中的语句没有执行，则会执行下面的 ret=False
+        ret = False
+    return ret
+
+
+ret = mail()
+if ret:
+    print("邮件发送成功")
+else:
+    print("邮件发送失败")
