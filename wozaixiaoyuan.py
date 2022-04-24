@@ -4,7 +4,7 @@ import urllib
 import requests
 requests.packages.urllib3.disable_warnings()
 # CK = 'e5fe7daab1b64929981cd4ddc38d232c'
-CK = 'e0d55ea7d2f640eb816f8058540a11ba'
+CK = '407714a4ad78495393ec386b919f1c8d'
 # param = 'answers=["0","0","0","2","0","1","1","0"]&\
 # llatitude=30.826655&\
 # longitude=104.185025&\
