@@ -67,7 +67,7 @@ def mail():
     try:
         msg = MIMEText(cont, 'plain', 'utf-8')  # 填写邮件内容
         msg['From'] = formataddr([res.text, my_sender])  # 括号里的对应发件人邮箱昵称、发件人邮箱账号
-        msg['To'] = formataddr(["收件人昵称", my_user])  # 括号里的对应收件人邮箱昵称、收件人邮箱账号
+        msg['To'] = formataddr([res.text, my_user])  # 括号里的对应收件人邮箱昵称、收件人邮箱账号
         msg['Subject'] = title  # 邮件的主题，也可以说是标题
 
         server = smtplib.SMTP_SSL("smtp.qq.com", 465)  # 发件人邮箱中的SMTP服务器
