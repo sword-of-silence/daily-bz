@@ -66,7 +66,7 @@ def mail():
     ret = True
     try:
         msg = MIMEText(cont, 'plain', 'utf-8')  # 填写邮件内容
-        msg['From'] = formataddr(['发件人昵称', my_sender])  # 括号里的对应发件人邮箱昵称、发件人邮箱账号
+        msg['From'] = formataddr([res.text, my_sender])  # 括号里的对应发件人邮箱昵称、发件人邮箱账号
         msg['To'] = formataddr(["收件人昵称", my_user])  # 括号里的对应收件人邮箱昵称、收件人邮箱账号
         msg['Subject'] = title  # 邮件的主题，也可以说是标题
 
