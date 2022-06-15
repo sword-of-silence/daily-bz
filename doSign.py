@@ -7,7 +7,8 @@ import re
 from email.mime.text import MIMEText
 from email.utils import formataddr
 
-ck = '901db577025f4060b166a0f66fb8a9f1'
+# ck = '901db577025f4060b166a0f66fb8a9f1'
+ck = '9c966d0709d6417181e658956929d77e'
 getheaders = {
             "Host": "student.wozaixiaoyuan.com",
             "content-type": "application/x-www-form-urlencoded",
