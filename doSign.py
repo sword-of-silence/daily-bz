@@ -9,7 +9,8 @@ from email.utils import formataddr
 
 # ck = '901db577025f4060b166a0f66fb8a9f1'
 # ck = '9c966d0709d6417181e658956929d77e'
-ck = '9431a17bd18a4c7398edcd59779579ae'
+# ck = '9431a17bd18a4c7398edcd59779579ae'
+ck = '929fabd967e841b5be40d00eaa4ca138'
 getheaders = {
             "Host": "student.wozaixiaoyuan.com",
             "content-type": "application/x-www-form-urlencoded",
